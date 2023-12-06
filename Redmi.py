@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 
 data = {
     'Model': ['Redmi Note 6 Pro', 'Redmi 4K Ultra HD Android Smart LED TV X65', 'Redmi 20000Mah Li-Polymer Power Bank', 'Redmi 5A', 'Redmi 12C', 'Redmi Note 4', 'Redmi Note 11S', 'Redmi Watch 2 Lite', 'Redmi 9A Sport', 'Redmi 4K Ultra HD Android Smart LED TV X55', 'Redmi 9I Sport', 'Redmi Note 11', 'Redmi 9 Prime', 'Redmi Note 12 5G', 'Redmi Note 12 Pro 5G', 'Redmi Note 12', 'Redmi Note 12 Pro Plus 5G', 'Redmi 12C', 'Redmi Note 12 4G'],
@@ -45,28 +44,17 @@ def main():
 
     # Plotting the graph
     st.subheader("Price Distribution of Models")
-    plt.figure(figsize=(10,6))
-    plt.barh(filtered_data['Model'], filtered_data['Price'])
-    plt.xlabel('Price')
-    plt.ylabel('Model')
-    plt.title('Price Distribution of Models')
-    st.pyplot(plt.gcf())
+    st.bar_chart(filtered_data.set_index('Model')['Price'])
 
     # Pie chart for storage
     st.subheader("Storage Distribution of Models")
     storage_counts = filtered_data['Storage'].value_counts()
-    plt.figure(figsize=(10,6))
-    plt.pie(storage_counts, labels=storage_counts.index, autopct='%1.1f%%')
-    plt.title('Storage Distribution of Models')
-    st.pyplot(plt.gcf())
+    st.pie_chart(storage_counts)
 
     # Pie chart for camera
     st.subheader("Camera Distribution of Models")
     camera_counts = filtered_data['Camera'].value_counts()
-    plt.figure(figsize=(10,6))
-    plt.pie(camera_counts, labels=camera_counts.index, autopct='%1.1f%%')
-    plt.title('Camera Distribution of Models')
-    st.pyplot(plt.gcf())
+    st.pie_chart(camera_counts)
 
 if __name__ == "__main__":
     main()
